@@ -1,0 +1,43 @@
+{
+	"name": "webcam-worker",
+	"private": true,
+	"version": "1.0.0-alpha",
+	"main": "dist/index.js",
+	"type": "module",
+	"types": "dist",
+	"module": "dist/index.js",
+	"scripts": {
+		"format": "prettier . --write && eslint . --fix",
+		"test": "vitest run test/unit",
+		"test:func:storage": "vitest run test/func/storage",
+		"test:func:camsecure": "vitest run test/func/camsecure",
+		"build": "rimraf dist && tsc -p tsconfig.build.json"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "MIT",
+	"description": "",
+	"devDependencies": {
+		"@eslint/compat": "^1.2.7",
+		"@eslint/js": "^9.20.0",
+		"@tsconfig/node20": "^20.1.4",
+		"@types/node": "^22.15.19",
+		"eslint": "^9.20.1",
+		"globals": "^15.14.0",
+		"pino-pretty": "^13.0.0",
+		"prettier": "^3.5.0",
+		"typescript": "^5.7.3",
+		"typescript-eslint": "^8.24.0",
+		"vitest": "^3.0.5"
+	},
+	"dependencies": {
+		"@aws-sdk/client-s3": "^3.744.0",
+		"base-x": "^5.0.0",
+		"dotenv": "^16.4.7",
+		"emittery": "^1.1.0",
+		"pino": "^9.6.0",
+		"pretty-bytes": "^6.1.1",
+		"pretty-ms": "^9.2.0",
+		"rimraf": "^6.0.1"
+	}
+}
