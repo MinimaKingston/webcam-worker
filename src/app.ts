@@ -31,6 +31,7 @@ class App {
 	readonly pid: string;
 	readonly name: string;
 	readonly baseDir: string;
+	readonly downloadDir: string;
 	readonly filesDir: string;
 	readonly logDir: string;
 	readonly isProduction: boolean;
@@ -59,6 +60,7 @@ class App {
 		// Set base directories.
 		this.baseDir = path.resolve(__dirname, '..');
 		this.filesDir = path.join(this.baseDir, 'files');
+		this.downloadDir = this.env.ATTACHED_STORAGE ?? this.filesDir;
 		this.logDir = path.join(this.baseDir, 'log');
 
 		// Set properties from package.json.

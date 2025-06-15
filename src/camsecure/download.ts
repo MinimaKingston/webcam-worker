@@ -50,7 +50,7 @@ let state = getInitialState();
 
 export const downloadRecordings = async (
 	{ logger, emitter }: { logger: Logger; emitter: Emitter },
-	{ baseUrl, filesDir }: Config,
+	{ baseUrl, filesDir, downloadDir }: Config,
 	options: Partial<Options> = {},
 ) => {
 	state = getInitialState();
@@ -103,9 +103,10 @@ export const downloadRecordings = async (
 			const f = parseCameraFilename(fileLink.filename);
 
 			// If it has already been downloaded continue.
-			const localFile = path.join(filesDir, f.year, f.month, f.day, f.filename);
+			// const localFile = path.join(filesDir, f.year, f.month, f.day, f.filename);
+			const downloadFile = path.join(downloadDir, f.year, f.month, f.day, f.filename);
 
-			if (existsSync(localFile)) {
+			if (existsSync(downloadFile)) {
 				logger.debug('Skipping %s, already downloaded', f.filename);
 				info.skippedFiles++;
 				skipped.push(f.filename);
@@ -115,7 +116,7 @@ export const downloadRecordings = async (
 
 			const filePath = fileLink.directPath;
 			try {
-				const [res] = await downloadCameraFile(filePath, filesDir, baseUrl);
+				const [res] = await downloadCameraFile(filePath, downloadDir, baseUrl);
 				// res.contentLength, res.etag, res.lastModified, res.localFile;
 				{
 					// Isolate scope for info.
